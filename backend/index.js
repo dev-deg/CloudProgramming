@@ -14,6 +14,8 @@ import path, { dirname } from "path";
 import https from "https";
 import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
 
+const PORT = 443;
+
 const startServerEncrypted = async () => {
   const sm = new SecretManagerServiceClient({
     projectId: "pftc0000001",
@@ -59,9 +61,6 @@ app.use(cors());
 app.use(session(config));
 
 //Delivering static files
-
-const PORT = 80;
-let requests = 0;
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
