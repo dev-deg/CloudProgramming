@@ -1,6 +1,24 @@
-# PFT
+# Programming For The Cloud
 
-Programming For The Cloud
+## Google Cloud Pins
+
+- Compute Engine [VM Instances]
+- Billing
+- Cloud Storage [ Browser ]
+- Firestore [ Data ]
+- Memorystore [ Redis ]
+- Security [Secret Manager ]
+- APIs & Services [ Credentials ]
+- Network services [ Cloud DNS ]
+
+## Domain & SSL (Namecheap)
+
+Generating certificate signing request (CSR)
+
+```bash
+npm install openssl
+openssl req -nodes -newkey rsa:2048 -keyout pk.key -out cert-req.csr
+```
 
 ## Project Setup
 
@@ -8,19 +26,41 @@ Programming For The Cloud
 2. Download and install Git
 3. Download and install Node.js
 4. Setup a private git Repository
-5. Set up NPM
 
-## Git Setup
+## GIT
+
+### GitIgnore Setup
+
+Create file .gitignore and put the following:
+
+```bash
+/frontend/node_modules
+/backend/node_modules
+/backend/key.json
+.DS_Store
+```
+
+### Git Repo
 
 ```bash
 git init
 git remote add origin [YOUR GIT URL]
 git add *
 git commit -a -m "init repo"
-git push origin master
+git push -u origin main
 ```
 
-## NPM Setup
+### Saving On Git
+
+```bash
+git add *
+git commit -a -m "[UPDATE INFO]"
+git push
+```
+
+## Backend Setup
+
+### Setting up NPM
 
 ```bash
 cd frontend
@@ -30,43 +70,19 @@ cd backend
 npm init -y
 ```
 
-## Saving On Git
-
-```bash
-git add *
-git commit -a -m "[UPDATE INFO]"
-git push origin master
-```
-
-## Installing Backend Packages
+### Installing Backend Packages
 
 ```bash
 cd backend
 npm i express
+npm i cors
 npm i @google-cloud/firestore
 npm i @google-cloud/secret-manager
 ```
 
-### WHAT IS AN API?
+## Deployment
 
-- API stands for Application Programming Interface
-
-### WHAT IS A REST API (RESTful API)?
-
-- REST stands for Representational State Transfer.
-
-- A REST API is an application programming interface that conforms to the constraints of REST architectural style and allows for interaction with RESTful web services.
-
-### HTTP Methods
-
-- These represent CRUD operations. CRUD stands for Create, Read, Update and Delete.
-
-GET - Fetches data
-POST - Sends new data
-PUT - Updates data
-DELETE - Deletes data
-
-# SERVER CONFIG
+### SERVER CONFIG
 
 ```bash
 sudo apt-get update
@@ -74,4 +90,27 @@ sudo apt-get upgrade -y
 curl -sL https://deb.nodesource.com/setup_17.x -o nodesource_setup.sh
 sudo bash nodesource_setup.sh
 sudo apt install nodejs -y
+sudo setcap cap_net_bind_service=+ep `readlink -f \`which node\``
+sudo npm i -g nodemon
+sudo npm i -g pm2
 ```
+
+### Running Backend
+
+```bash
+git clone repo
+cd repo/backend
+pm2 start index.js
+```
+
+### PM2 Commands
+
+```bash
+pm2 list
+pm2 start
+pm2 stop     <app_name|namespace|id|'all'|json_conf>
+pm2 restart  <app_name|namespace|id|'all'|json_conf>
+pm2 delete   <app_name|namespace|id|'all'|json_conf>
+```
+
+More info here: https://www.npmjs.com/package/pm2
