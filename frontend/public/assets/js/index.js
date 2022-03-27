@@ -7,6 +7,7 @@ const authenticateReq = async (email, token) => {
   console.log("Sending auth req to server..");
   const response = await axios.post(url, headers);
   console.log(response);
+  console.log(response.name);
 };
 
 async function loadGoogleLogin() {
@@ -45,7 +46,6 @@ async function loadGoogleLogin() {
         var profile = googleUser.getBasicProfile();
         const email = profile.getEmail();
         authenticateReq(email, googleUser.getAuthResponse().id_token);
-        console.log(`User ${email}  by Google.`);
       },
       function (error) {
         alert(
