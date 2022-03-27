@@ -22,6 +22,8 @@ async function loadGoogleLogin() {
   let session = document.cookie;
   if (session && session.includes("token")) {
     authenticateReq(session.split("token=")[1].split(";")[0]);
+  } else {
+    signInButton.hidden = false;
   }
 
   const signOut = () => {
