@@ -27,18 +27,59 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
-            <li class="nav-item">
-              <a id="signIn" class="nav-link" href="#" hidden="true">Sign In</a>
-              <a id="signOut" class="nav-link" href="#" hidden="true"
-                >Sign Out</a
-              >
-            </li>
           </ul>
+
+          <!-- Right elements -->
+          <div
+            class="d-flex align-items-center justify-content-end"
+            style="margin-left: auto"
+          >
+            <!-- Avatar -->
+            <ul id="signInContainer" class="navbar-nav" style="display: none">
+              <li class="nav-item">
+                <a id="signIn" class="nav-link active" href="#">Sign In</a>
+              </li>
+            </ul>
+
+            <div id="profile" class="nav-item dropdown" style="display: none">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="color: white"
+              >
+                <img
+                  id="picture"
+                  src=""
+                  class="rounded-circle"
+                  style="margin-right: 5px"
+                  height="25"
+                  alt=""
+                  loading="lazy"
+                />
+                David Deg
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <li>
+                  <a class="dropdown-item" id="signOut" href="#">Sign Out</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Right elements -->
         </div>
       </div>
     </nav>
@@ -53,7 +94,6 @@
     </section>
 
     <footer class="bg-light text-center text-lg-start">
-      <!-- Copyright -->
       <div class="text-center p-3 bg-primary" style="color: white">
         © 2022 Copyright: MSD6.3B
       </div>

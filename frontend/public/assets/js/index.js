@@ -1,5 +1,8 @@
 let signInButton = document.getElementById("signIn");
 let signOutButton = document.getElementById("signOut");
+let profile = document.getElementById("profile");
+let signInContainer = document.getElementById("signInContainer");
+let picture = document.getElementById("picture");
 
 const authenticateReq = async (token) => {
   const url = `https://dev-deg.me/auth?token=${token}`;
@@ -8,14 +11,22 @@ const authenticateReq = async (token) => {
     "Access-Control-Allow-Origin": "*",
   };
   const response = await axios.post(url, headers);
-  const name = response.data.name;
-  const email = response.data.email;
-  const picture = response.data.picture;
-  const expiry = response.data.expiry;
-  signInButton.hidden = true;
-  signOutButton.hidden = false;
-  document.cookie = `token=${token};expires=${expiry}`;
-  console.log(`${name} signed in successfully.`);
+  const status = response.data.status;
+
+  if (status == 200) {
+    const name = response.data.name;
+    const email = response.data.email;
+    const picture = response.data.picture;
+    const expiry = response.data.expiry;
+    profile.style.display = "inline";
+    signInContainer.style.display = "none";
+    picture.src = picture;
+    document.cookie = `token=${token};expires=${expiry}`;
+    console.log(`${name} signed in successfully.`);
+  } else {
+    profile.style.display = "none";
+    signInContainer.style.display = "inline";
+  }
 };
 
 async function loadGoogleLogin() {
@@ -23,17 +34,18 @@ async function loadGoogleLogin() {
   if (session && session.includes("token")) {
     authenticateReq(session.split("token=")[1].split(";")[0]);
   } else {
-    signInButton.hidden = false;
+    profile.style.display = "none";
+    signInContainer.style.display = "inline";
   }
 
   const signOut = () => {
-    var auth2 = gapi.auth2.getAuthInstance();
+    let auth2 = gapi.auth2.getAuthInstance();
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     auth2
       .signOut()
       .then(() => {
-        signOutButton.hidden = true;
-        signInButton.hidden = false;
+        profile.style.display = "none";
+        signInContainer.style.display = "inline";
         console.log("User signed out.");
       })
       .catch((error) => alert(error));
