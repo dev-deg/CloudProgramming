@@ -1,3 +1,6 @@
+let signInButton = document.getElementById("signIn");
+let signOutButton = document.getElementById("signOut");
+
 const authenticateReq = async (token) => {
   const url = `https://dev-deg.me/auth?token=${token}`;
   const headers = {
@@ -15,9 +18,6 @@ const authenticateReq = async (token) => {
 };
 
 async function loadGoogleLogin() {
-  let signInButton = document.getElementById("signIn");
-  let signOutButton = document.getElementById("signOut");
-
   const signOut = () => {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2
