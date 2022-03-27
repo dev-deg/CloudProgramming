@@ -12,20 +12,28 @@ auth.route("/").post((req, res) => {
   const email = req.query.email;
   const token = req.query.token;
   console.log(`Auth request by ${email} with token ${token}`);
-  const ticket = await client.verifyIdToken({
-    idToken: token,
-    audience: CLIENT_ID,
-  }).catch((error) => {
-    console.log(error);
-    res.send({status: "401"});
-  });
-  const payload = ticket.getPayload();
-  if (email == payload.email){
-    res.send({status: "200",name: payload.name,email: playload.email,picture: payload.picture, token: token});
-    console.log(`${payload.name} has logged in.`)
-}else{
-    res.send({status: "401"});
-  }
- 
+  client
+    .verifyIdToken({
+      idToken: token,
+      audience: CLIENT_ID,
+    })
+    .catch((error) => {
+      console.log(error);
+      res.send({ status: "401" });
+    })
+    .then((ticket) => {
+      const payload = ticket.getPayload();
+      if (email == payload.email) {
+        res.send({
+          status: "200",
+          name: payload.name,
+          email: playload.email,
+          picture: payload.picture,
+          token: token,
+        });
+        console.log(`${payload.name} has logged in.`);
+      } else {
+        res.send({ status: "401" });
+      }
+    });
 });
-
