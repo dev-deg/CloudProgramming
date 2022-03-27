@@ -1,4 +1,14 @@
-function loadGoogleLogin() {
+const authenticateReq = async (email, token) => {
+  const url = `http://dev-deg/auth?email=${email}&token=${token}`;
+  const headers = {
+    "Content-Type": "text/html",
+    "Access-Control-Allow-Origin": "*",
+  };
+  const response = await axios.post(url, headers);
+  console.log(response);
+};
+
+const loadGoogleLogin = async () => {
   let signInButton = document.getElementById("signIn");
   let signOutButton = document.getElementById("signOut");
 
@@ -32,10 +42,8 @@ function loadGoogleLogin() {
         signInButton.hidden = true;
         signOutButton.hidden = false;
         var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log("Name: " + profile.getName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+        await authenticateReq(profile.getEmail(),googleUser.getAuthResponse().id_token)
       },
       function (error) {
         alert(
@@ -44,4 +52,4 @@ function loadGoogleLogin() {
       }
     );
   });
-}
+};

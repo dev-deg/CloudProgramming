@@ -15,7 +15,8 @@
     "@google-cloud/firestore": "^5.0.2",
     "@google-cloud/secret-manager": "^3.11.0",
     "cors": "^2.8.5",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "google-auth-library": "^7.14.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
