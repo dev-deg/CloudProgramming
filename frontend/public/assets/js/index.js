@@ -20,6 +20,7 @@ const authenticateReq = async (token) => {
     profile.style.display = "inline";
     signInContainer.style.display = "none";
     document.getElementById("picture").src = picture;
+    document.getElementById("navbarDropdownMenuLink").innerHTML = name;
     document.cookie = `token=${token};expires=${expiry}`;
     console.log(`${name} signed in successfully.`);
   } else {
