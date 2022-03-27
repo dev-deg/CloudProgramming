@@ -1,5 +1,5 @@
 const authenticateReq = async (email, token) => {
-  const url = `http://dev-deg/auth?email=${email}&token=${token}`;
+  const url = `https://dev-deg/auth?email=${email}&token=${token}`;
   const headers = {
     "Content-Type": "text/html",
     "Access-Control-Allow-Origin": "*",
