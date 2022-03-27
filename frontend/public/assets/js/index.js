@@ -9,7 +9,7 @@ const authenticateReq = async (email, token) => {
   console.log(response);
 };
 
-export const loadGoogleLogin = async () => {
+async function loadGoogleLogin() {
   let signInButton = document.getElementById("signIn");
   let signOutButton = document.getElementById("signOut");
 
@@ -54,4 +54,4 @@ export const loadGoogleLogin = async () => {
       }
     );
   });
-};
+}
