@@ -27,7 +27,7 @@ auth.route("/").post((req, res) => {
         res.send({
           status: "200",
           name: payload.name,
-          email: playload.email,
+          email: payload.email,
           picture: payload.picture,
           token: token,
         });
