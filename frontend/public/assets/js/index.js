@@ -15,6 +15,7 @@ const authenticateReq = async (token) => {
   signInButton.hidden = true;
   signOutButton.hidden = false;
   document.cookie = `token=${token};Max-Age=${expiry}`;
+  console.log(`${name} signed in successfully.`);
 };
 
 async function loadGoogleLogin() {
