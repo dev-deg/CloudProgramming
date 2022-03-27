@@ -19,8 +19,18 @@ const authenticateReq = async (token) => {
     const expiry = response.data.expiry;
     profile.style.display = "inline";
     signInContainer.style.display = "none";
+
+    document.getElementById("navbarDropdownMenuLink").innerHTML =
+      `<img
+    id="picture"
+    src=""
+    class="rounded-circle"
+    style="margin-right: 5px"
+    height="25"
+    alt=""
+    loading="lazy"
+  />` + name;
     document.getElementById("picture").src = picture;
-    document.getElementById("navbarDropdownMenuLink").innerHTML = name;
     document.cookie = `token=${token};expires=${expiry}`;
     console.log(`${name} signed in successfully.`);
   } else {
