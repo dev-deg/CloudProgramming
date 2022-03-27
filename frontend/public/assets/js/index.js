@@ -4,6 +4,7 @@ const authenticateReq = async (email, token) => {
     "Content-Type": "text/html",
     "Access-Control-Allow-Origin": "*",
   };
+  console.log("Sending auth req to server..");
   const response = await axios.post(url, headers);
   console.log(response);
 };
@@ -42,10 +43,9 @@ const loadGoogleLogin = async () => {
         signInButton.hidden = true;
         signOutButton.hidden = false;
         var profile = googleUser.getBasicProfile();
-        authenticateReq(
-          profile.getEmail(),
-          googleUser.getAuthResponse().id_token
-        );
+        const email = profile.getEmail();
+        authenticateReq(email, googleUser.getAuthResponse().id_token);
+        console.log(`User ${email}  by Google.`);
       },
       function (error) {
         alert(
