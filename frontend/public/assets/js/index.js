@@ -18,7 +18,7 @@ const authenticateReq = async (token) => {
 };
 
 async function loadGoogleLogin() {
-  let session = document.cookie.session;
+  let session = document.cookie.token;
   if (session) {
     authenticateReq(session);
   }
