@@ -25,13 +25,13 @@ const sm = new SecretManagerServiceClient({
 
 export let PDF_API_KEY = "";
 
-const startServer = async (ssl) => {
+const startServer = async () => {
   //Load GetOutPDF API Key
   const [pdf] = await sm.accessSecretVersion({
     name: SECRET_MANAGER_GET_OUT_PDF,
   });
   PDF_API_KEY = pdf.payload.data.toString();
-  if (ssl) {
+  if (!DEV) {
     const [pub] = await sm.accessSecretVersion({
       name: SECRET_MANAGER_CERT,
     });
@@ -75,4 +75,4 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
-startServer(DEV);
+startServer();
