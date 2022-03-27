@@ -6,7 +6,7 @@ import path, { dirname } from "path";
 import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
 import auth from "./routes/auth.js";
 
-const DEV = true;
+const DEV = false;
 const PORT = DEV ? 80 : 443;
 const SECRET_MANAGER_CERT =
   "projects/578170717869/secrets/PublicKey/versions/latest";
@@ -75,4 +75,4 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
-startServer(true);
+startServer(DEV);
