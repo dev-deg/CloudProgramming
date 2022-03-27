@@ -9,7 +9,7 @@ const authenticateReq = async (email, token) => {
   console.log(response);
 };
 
-const loadGoogleLogin = async () => {
+export const loadGoogleLogin = async () => {
   let signInButton = document.getElementById("signIn");
   let signOutButton = document.getElementById("signOut");
 
