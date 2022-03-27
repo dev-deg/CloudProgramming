@@ -19,14 +19,11 @@ const authenticateReq = async (token) => {
 };
 
 async function loadGoogleLogin() {
-  let session = document.cookie;
+  let session = document.cookie.split("token=")[1].split(";")[0];
   console.log(session);
-  console.log(session.token);
-  console.log(session.split("token=")[1]);
-  console.log(session.split("token=")[1].split(";")[0]);
-  // if (session) {
-  //   authenticateReq(session);
-  // }
+  if (session) {
+    authenticateReq(session);
+  }
 
   const signOut = () => {
     var auth2 = gapi.auth2.getAuthInstance();
