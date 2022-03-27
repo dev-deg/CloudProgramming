@@ -8,7 +8,6 @@ const authenticateReq = async (token) => {
   const name = response.data.name;
   const email = response.data.email;
   const picture = response.data.picture;
-  const token = response.data.token;
   const expiry = response.data.expiry;
   signInButton.hidden = true;
   signOutButton.hidden = false;
