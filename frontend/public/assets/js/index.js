@@ -2,7 +2,6 @@ let signInButton = document.getElementById("signIn");
 let signOutButton = document.getElementById("signOut");
 let profile = document.getElementById("profile");
 let signInContainer = document.getElementById("signInContainer");
-let picture = document.getElementById("picture");
 
 const authenticateReq = async (token) => {
   const url = `https://dev-deg.me/auth?token=${token}`;
@@ -20,7 +19,7 @@ const authenticateReq = async (token) => {
     const expiry = response.data.expiry;
     profile.style.display = "inline";
     signInContainer.style.display = "none";
-    picture.src = picture;
+    document.getElementById("picture").src = picture;
     document.cookie = `token=${token};expires=${expiry}`;
     console.log(`${name} signed in successfully.`);
   } else {
