@@ -14,7 +14,7 @@ const authenticateReq = async (token) => {
   const expiry = response.data.expiry;
   signInButton.hidden = true;
   signOutButton.hidden = false;
-  document.cookie = `token=${token};Max-Age=${expiry}`;
+  document.cookie = `token=${token};expires=${expiry}`;
   console.log(`${name} signed in successfully.`);
 };
 
@@ -27,6 +27,7 @@ async function loadGoogleLogin() {
 
   const signOut = () => {
     var auth2 = gapi.auth2.getAuthInstance();
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     auth2
       .signOut()
       .then(() => {
