@@ -1,13 +1,18 @@
-const authenticateReq = async (email, token) => {
-  const url = `https://dev-deg.me/auth?email=${email}&token=${token}`;
+const authenticateReq = async (token) => {
+  const url = `https://dev-deg.me/auth?token=${token}`;
   const headers = {
     "Content-Type": "text/html",
     "Access-Control-Allow-Origin": "*",
   };
-  console.log("Sending auth req to server..");
   const response = await axios.post(url, headers);
-  console.log(response);
-  console.log(response.name);
+  const name = response.data.name;
+  const email = response.data.email;
+  const picture = response.data.picture;
+  const token = response.data.token;
+  const expiry = response.data.expiry;
+  signInButton.hidden = true;
+  signOutButton.hidden = false;
+  document.cookie = `token=${token};Max-Age=${expiry}`;
 };
 
 async function loadGoogleLogin() {
@@ -41,11 +46,7 @@ async function loadGoogleLogin() {
       signInButton,
       {},
       function (googleUser) {
-        signInButton.hidden = true;
-        signOutButton.hidden = false;
-        var profile = googleUser.getBasicProfile();
-        const email = profile.getEmail();
-        authenticateReq(email, googleUser.getAuthResponse().id_token);
+        authenticateReq(googleUser.getAuthResponse().id_token);
       },
       function (error) {
         alert(

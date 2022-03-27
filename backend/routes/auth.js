@@ -9,9 +9,7 @@ const client = new OAuth2Client(CLIENT_ID);
 export default auth;
 
 auth.route("/").post((req, res) => {
-  const email = req.query.email;
   const token = req.query.token;
-  console.log(`Auth request by ${email} with token ${token}`);
   client
     .verifyIdToken({
       idToken: token,
@@ -22,14 +20,15 @@ auth.route("/").post((req, res) => {
       res.send({ status: "401" });
     })
     .then((ticket) => {
-      const payload = ticket.getPayload();
-      if (email == payload.email) {
+      if (ticket) {
+        const payload = ticket.getPayload();
         res.send({
           status: "200",
           name: payload.name,
           email: payload.email,
           picture: payload.picture,
           token: token,
+          expiry: payload.exp,
         });
         console.log(`${payload.name} has logged in.`);
       } else {
