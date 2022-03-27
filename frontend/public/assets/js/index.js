@@ -18,6 +18,11 @@ const authenticateReq = async (token) => {
 };
 
 async function loadGoogleLogin() {
+  let session = document.cookie.session;
+  if (session) {
+    authenticateReq(session);
+  }
+
   const signOut = () => {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2
@@ -40,16 +45,6 @@ async function loadGoogleLogin() {
       cookiepolicy: "single_host_origin",
       scope: "profile",
     });
-
-    if (auth2.isSignedIn.get()) {
-      var profile = auth2.currentUser.get().getBasicProfile();
-      console.log("ID: " + profile.getId());
-      console.log("Full Name: " + profile.getName());
-      console.log("Given Name: " + profile.getGivenName());
-      console.log("Family Name: " + profile.getFamilyName());
-      console.log("Image URL: " + profile.getImageUrl());
-      console.log("Email: " + profile.getEmail());
-    }
 
     auth2.attachClickHandler(
       signInButton,
