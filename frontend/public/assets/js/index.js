@@ -42,8 +42,10 @@ const loadGoogleLogin = async () => {
         signInButton.hidden = true;
         signOutButton.hidden = false;
         var profile = googleUser.getBasicProfile();
-
-        await authenticateReq(profile.getEmail(),googleUser.getAuthResponse().id_token)
+        authenticateReq(
+          profile.getEmail(),
+          googleUser.getAuthResponse().id_token
+        );
       },
       function (error) {
         alert(
