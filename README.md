@@ -79,6 +79,8 @@ npm i express
 npm i cors
 npm i @google-cloud/firestore
 npm i @google-cloud/secret-manager
+npm i google-auth-library
+npm i axios
 ```
 
 ## Deployment
@@ -142,20 +144,14 @@ More info here: https://www.npmjs.com/package/pm2
 
 ## Testing the Project
 
-When running the project on your local machine, disable SSL and run the project on port 80. So in the backend app.js, make sure you have startServer() and startServerEncrypted() commented.
+When running the project on your local machine, SSL needs to be disabled and the project should run on port 80 or otherwise. So in the backend app.js, set DEV = true.
 
 ```js
-const PORT = 80;
-
-startServer();
-//startServerEncrypted();
+const DEV = true;
 ```
 
-When running the project on the server, change the port to 443 and run startServerEncrypted() instead of startServer().
+When running the project on the server, the port needs to change to 443 and run in SSL mode. So in the backend app.js, set DEV = false.
 
 ```js
-const PORT = 443;
-
-//startServer();
-startServerEncrypted();
+const DEV = false;
 ```
