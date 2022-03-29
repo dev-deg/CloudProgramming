@@ -10,12 +10,12 @@
       crossorigin="anonymous"
     />
 
-    <title>Lunchtime!</title>
+    <title>PDF Makeover</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">LunchTime</a>
+        <a class="navbar-brand" href="/">PDF Makeover</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -75,12 +75,31 @@
     </nav>
 
     <section>
-      <img
-        src="https://images.unsplash.com/photo-1642337243192-82eccda657de?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-        class="img-fluid"
-        alt="Very good food!"
-        width="100%"
-      />
+      <div class="container-fluid" style="height: 88.5vh">
+        <div
+          class="row justify-content-center m-3m align-items-center"
+          style="height: 100%"
+        >
+          <div class="col-auto justify-content-center">
+            <input
+              id="fileInput"
+              class="form-control"
+              type="file"
+              id="formFile"
+            />
+          </div>
+          <div class="col-auto justify-content-center">
+            <button
+              id="convert"
+              type="button"
+              class="btn btn-primary"
+              onclick="uploadFile()"
+            >
+              Convert
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer class="bg-light text-center text-lg-start">
@@ -97,6 +116,7 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/fileupload.js"></script>
     <script
       src="https://apis.google.com/js/platform.js?onload=loadGoogleLogin"
       async
