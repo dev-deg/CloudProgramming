@@ -81,6 +81,7 @@ npm i @google-cloud/firestore
 npm i @google-cloud/secret-manager
 npm i google-auth-library
 npm i axios
+npm i multer
 ```
 
 ## Deployment
