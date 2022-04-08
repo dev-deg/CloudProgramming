@@ -10,15 +10,7 @@ export default auth;
 
 auth.route("/").post((req, res) => {
   const token = req.query.token;
-  client
-    .verifyIdToken({
-      idToken: token,
-      audience: CLIENT_ID,
-    })
-    .catch((error) => {
-      console.log(error);
-      res.send({ status: "401" });
-    })
+  validateToken(token)
     .then((ticket) => {
       if (ticket) {
         const payload = ticket.getPayload();
@@ -30,9 +22,19 @@ auth.route("/").post((req, res) => {
           token: token,
           expiry: payload.exp,
         });
-        console.log(`${payload.name} has logged in.`);
       } else {
         res.send({ status: "401" });
       }
+    })
+    .catch((error) => {
+      console.log("Token expired");
+      res.send({ status: "401" });
     });
 });
+
+export const validateToken = async (token) => {
+  return await client.verifyIdToken({
+    idToken: token,
+    audience: CLIENT_ID,
+  });
+};

@@ -32,9 +32,16 @@ let imageUpload = multer({
 upload.route("/").post(imageUpload.single("image"), (req, res) => {
   if (req.file) {
     console.log("File downloaded at: " + req.file.path);
-    //Upload to google cloud
+
+    //Upload to google cloud bucket (pending)
     //Convert to base64
     //Send to PDF Conversion API
+    //Wait for response from PDF Conversion API
+    //Convert base64 to bytes
+    //Save the response in google cloud bucket (completed)
+    //Send the file to the front-end for download
+    //reduce 1 credit from the user
+
     res.send({
       status: "200",
       message: "File uploaded successfully! Processing..",

@@ -30,9 +30,16 @@ const authenticateReq = async (token) => {
     alt=""
     loading="lazy"
   />` + name;
+
+    document.getElementById(
+      "home-container"
+    ).innerHTML = `<a class="nav-link active" aria-current="page" href="/home?token=${token}">Home</a>`;
+
     document.getElementById("picture").src = picture;
-    document.cookie = `token=${token};expires=${expiry}`;
-    console.log(`${name} signed in successfully.`);
+    //Cookie bug fix
+    let date = new Date();
+    date.setTime(date.getTime() + expiry);
+    document.cookie = `token=${token};expires=${date.toUTCString()}`;
   } else {
     profile.style.display = "none";
     signInContainer.style.display = "inline";
@@ -56,6 +63,7 @@ async function loadGoogleLogin() {
       .then(() => {
         profile.style.display = "none";
         signInContainer.style.display = "inline";
+        document.getElementById("home-container").innerHTML = "";
         console.log("User signed out.");
       })
       .catch((error) => alert(error));
